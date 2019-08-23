@@ -4,11 +4,27 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import reducer from "./store/reducer";
 import { createStore } from "redux";
+import { Provider } from "react-redux";
+import AllReducers from "./Reducers";
 
-const store = createStore(reducer);
+/* 
 
-ReactDOM.render(<App />, document.getElementById("root"));
+WATCH VIDEO HERE:
+https://www.youtube.com/watch?v=CVpUuw9XSjY&t=1526s 
+
+*/
+
+const store = createStore(
+  AllReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
 
 serviceWorker.unregister();
